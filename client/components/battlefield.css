@@ -13,4 +13,5 @@
   height:auto;
   position:fixed;
   bottom:100px;
+  z-index:1;
 }

@@ -2,13 +2,17 @@ let keyPressStates = {
   up: false,
   down: false,
   left: false,
-  right: false
+  right: false,
+  q: false
 }
 
 export let upInterval 
 export let downInterval
 export let leftInterval
 export let rightInterval
+export let qInterval
+
+export let primaryCount = 0;
 
 export const onKeyDown = (event) => {
 
@@ -35,6 +39,7 @@ export const onKeyDown = (event) => {
       }
       break;
     case "ArrowLeft":
+        // only toggle if key hasnt been pressed already
       if(keyPressStates.left === false){
         keyPressStates.left = true
         // console.log("left")
@@ -44,6 +49,7 @@ export const onKeyDown = (event) => {
       }
       break;
     case "ArrowRight":
+        // only toggle if key hasnt been pressed already
       if(keyPressStates.right === false){
         keyPressStates.right = true
         // console.log("right")
@@ -51,7 +57,36 @@ export const onKeyDown = (event) => {
           $(".playerShip").animate({ left: "+=10px" }, {duration: 10, queue: false})
         }, 30)
       }
-  
+      
+      break;
+    case "q":
+      if(keyPressStates.q === false){
+        keyPressStates.q = true
+
+        qInterval = setInterval(() => {
+          // get playership and arena elements
+          let arena = document.getElementsByClassName("mainContainer")[0]
+          let playerShip = document.getElementsByClassName("playerShip")[0]
+          // generate a new bullet 
+          let bullet = document.createElement("div")
+          // apply styles to the bullet
+          bullet.classList.add("playerPrimary")
+          bullet.classList.add("playerPrimary"+ primaryCount)
+          bullet.style.top = playerShip.getBoundingClientRect().top + "px"
+          bullet.style.left = playerShip.getBoundingClientRect().left + 73 + "px"
+          
+          // append the bullet to arena
+          arena.appendChild(bullet)
+          // animate the bullet
+          $(".playerPrimary" + primaryCount).animate({top: "-200px"}, {duration: 500, queue: false, done: () => {
+            arena.removeChild(bullet)
+          }})
+          primaryCount++
+          // destroy the bullet
+        }, 100)
+      }
+    default:
+      console.log(event);
       break;
   }
 }
@@ -79,6 +114,13 @@ export const onKeyUp = (event) => {
       // console.log("right");
       keyPressStates.right = false
       clearInterval(rightInterval)
+      break;
+    case "q":
+      keyPressStates.q = false
+      clearInterval(qInterval)
+      break;
+    default:
+      console.log(event);
       break;
   }
 }
