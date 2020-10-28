@@ -17,6 +17,10 @@ import {
   checkDestroyedShipsInterval
 } from "../../components/Battlefield"
 
+import {
+  clearEnemyCount
+} from "../../helpers/enemyShips"
+
 export const startGame = data => dispatch => {
   try {
     dispatch({
@@ -29,6 +33,16 @@ export const startGame = data => dispatch => {
 }
 
 export const exitGame = data => dispatch => {
+ 
+  document.removeEventListener("keydown", onKeyDown)
+  document.removeEventListener("keyup", onKeyUp)
+  clearInterval(boundaryCheckInterval)
+  clearInterval(checkHealthInterval)
+  clearInterval(checkEnemyCountInterval)
+  clearInterval(checkEnemyHitInterval)
+  clearInterval(checkDestroyedShipsInterval)
+  clearEnemyCount()
+
   try {
     dispatch({
       type: EXIT_GAME,
@@ -48,7 +62,7 @@ export const enterScorescreen = data => dispatch => {
   clearInterval(checkEnemyCountInterval)
   clearInterval(checkEnemyHitInterval)
   clearInterval(checkDestroyedShipsInterval)
-
+  clearEnemyCount()
   try {
     dispatch({
       type: ENTER_SCORESCREEN,

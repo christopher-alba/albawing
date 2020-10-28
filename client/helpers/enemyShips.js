@@ -46,3 +46,7 @@ export const clearDestroyedShips = () => {
 
   }
 }
+
+export const clearEnemyCount = () => {
+  maxEnemyShips = 1;
+}
