@@ -8,9 +8,9 @@ import { connect } from 'react-redux'
 const App = (props) => {
   return (
     <>
-      {props.gameStarted && <Home />}
-      {!props.gameStarted && <Battlefield />}
-      {!props.gameStarted && <GameUI />}
+      {!props.gameStarted && <Home />}
+      {props.gameStarted && <Battlefield />}
+      {props.gameStarted && <GameUI />}
     </>
   )
 }
