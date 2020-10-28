@@ -10,13 +10,13 @@ export const boundaryCheck = () => {
   if(playerShipPos.top <= 150){
     clearInterval(upInterval)
   } 
-  if(playerShipPos.top >= window.innerHeight - 200) {
+  if(playerShipPos.bottom >= window.innerHeight - 100) {
     clearInterval(downInterval)
   } 
   if(playerShipPos.left <= 100){
     clearInterval(leftInterval)
   } 
-  if(playerShipPos.left >= window.innerWidth - 200 ){
+  if(playerShipPos.right >= window.innerWidth - 100 ){
     clearInterval(rightInterval)
   }
 }
