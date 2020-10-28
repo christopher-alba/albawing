@@ -4,3 +4,9 @@
   background:red;
   position:fixed;
 }
+
+.enemyShip{
+  width:150px;
+  height:auto;
+  transform: rotate(180deg)
+}

@@ -18,7 +18,7 @@ export let keyPressStates = {
 }
 
 
-export let playerHealth = 0
+export let playerHealth = 100
 export let upInterval 
 export let downInterval
 export let leftInterval
