@@ -4,8 +4,21 @@ import {
   ENTER_SCORESCREEN
 } from '../types'
 
+import {
+  onKeyDown,
+  onKeyUp
+} from '../../helpers/playerShip'
+
+import {
+  boundaryCheckInterval,
+  checkHealthInterval,
+  checkEnemyCountInterval,
+  checkEnemyHitInterval,
+  checkDestroyedShipsInterval
+} from "../../components/Battlefield"
+
 export const startGame = data => dispatch => {
-  try{
+  try {
     dispatch({
       type: START_GAME,
       payload: data
@@ -19,7 +32,7 @@ export const exitGame = data => dispatch => {
   try {
     dispatch({
       type: EXIT_GAME,
-      payload:data
+      payload: data
     })
   } catch (err) {
     console.log("Error in exitGame action", err.message)
@@ -27,8 +40,17 @@ export const exitGame = data => dispatch => {
 }
 
 export const enterScorescreen = data => dispatch => {
+
+  document.removeEventListener("keydown", onKeyDown)
+  document.removeEventListener("keyup", onKeyUp)
+  clearInterval(boundaryCheckInterval)
+  clearInterval(checkHealthInterval)
+  clearInterval(checkEnemyCountInterval)
+  clearInterval(checkEnemyHitInterval)
+  clearInterval(checkDestroyedShipsInterval)
+
   try {
-    dispatch ({
+    dispatch({
       type: ENTER_SCORESCREEN,
       payload: data
     })

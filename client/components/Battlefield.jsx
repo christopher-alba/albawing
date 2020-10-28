@@ -19,11 +19,11 @@ import {
   checkEnemyHit 
 } from '../helpers/hitDetection'
 
-let boundaryCheckInterval
+export let boundaryCheckInterval
 export let checkHealthInterval 
-let checkEnemyCountInterval
-let checkEnemyHitInterval
-let checkDestroyedShipsInterval
+export let checkEnemyCountInterval
+export let checkEnemyHitInterval
+export let checkDestroyedShipsInterval
 
 class Battlefield extends Component {
  
