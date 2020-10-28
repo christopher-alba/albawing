@@ -12,12 +12,18 @@ import {
 } from '../helpers/boundaries'
 
 import {
-  checkEnemyCount, spawnEnemyShips
+  checkEnemyCount, clearDestroyedShips, spawnEnemyShips
 } from '../helpers/enemyShips'
+
+import {
+  checkEnemyHit 
+} from '../helpers/hitDetection'
 
 let boundaryCheckInterval
 export let checkHealthInterval 
 let checkEnemyCountInterval
+let checkEnemyHitInterval
+let checkDestroyedShipsInterval
 
 class Battlefield extends Component {
  
@@ -27,6 +33,8 @@ class Battlefield extends Component {
     boundaryCheckInterval = setInterval(boundaryCheck, 10)
     checkHealthInterval = setInterval(checkPlayerHealth, 100)
     checkEnemyCountInterval = setInterval(checkEnemyCount,100)
+    checkEnemyHitInterval = setInterval(checkEnemyHit, 10)
+    checkDestroyedShipsInterval = setInterval(clearDestroyedShips,10)
     spawnEnemyShips()
   }
   componentWillUnmount() {
@@ -34,6 +42,9 @@ class Battlefield extends Component {
     document.removeEventListener("keyup", onKeyUp)
     clearInterval(boundaryCheckInterval)
     clearInterval(checkHealthInterval)
+    clearInterval(checkEnemyCountInterval)
+    clearInterval(checkEnemyHitInterval)
+    clearInterval(checkDestroyedShipsInterval)
   }
 
   render() {
