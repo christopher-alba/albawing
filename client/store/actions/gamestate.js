@@ -1,6 +1,7 @@
 import {
   START_GAME,
-  EXIT_GAME
+  EXIT_GAME,
+  ENTER_SCORESCREEN
 } from '../types'
 
 export const startGame = data => dispatch => {
@@ -22,5 +23,16 @@ export const exitGame = data => dispatch => {
     })
   } catch (err) {
     console.log("Error in exitGame action", err.message)
+  }
+}
+
+export const enterScorescreen = data => dispatch => {
+  try {
+    dispatch ({
+      type: ENTER_SCORESCREEN,
+      payload: data
+    })
+  } catch (err) {
+    console.log("Error in enterScorescreen action", err.message)
   }
 }

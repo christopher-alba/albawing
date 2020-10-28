@@ -1,2 +1,3 @@
 export const START_GAME = 'START_GAME'
 export const EXIT_GAME = 'EXIT_GAME'
+export const ENTER_SCORESCREEN = ' ENTER_SCORESCREEN'

@@ -1,3 +1,14 @@
+
+import {
+  firePrimary,
+  qInterval
+} from './playerWeapons'
+
+import {store} from '../index'
+import {
+  enterScorescreen
+} from '../store/actions/gamestate'
+import { checkHealthInterval } from '../components/Battlefield'
 export let keyPressStates = {
   up: false,
   down: false,
@@ -6,11 +17,8 @@ export let keyPressStates = {
   q: false
 }
 
-import {
-  firePrimary,
-  qInterval
-} from './playerWeapons'
 
+export let playerHealth = 0
 export let upInterval 
 export let downInterval
 export let leftInterval
@@ -63,8 +71,8 @@ export const onKeyDown = (event) => {
       break;
     case "q":
       firePrimary();
+      break;
     default:
-      console.log(event);
       break;
   }
 }
@@ -100,5 +108,13 @@ export const onKeyUp = (event) => {
     default:
       console.log(event);
       break;
+  }
+}
+
+export const checkPlayerHealth = () => {
+  if(playerHealth <= 0){
+    console.log("testing");
+    clearInterval(checkHealthInterval)
+    store.dispatch(enterScorescreen())
   }
 }

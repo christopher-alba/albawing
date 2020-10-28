@@ -1,21 +1,31 @@
 import {
   START_GAME,
-  EXIT_GAME
+  EXIT_GAME,
+  ENTER_SCORESCREEN
 } from '../types'
 
 const INITIAL_STATE = {
-  gamestarted: false
+  gamestarted: false,
+  scorescreen: false
 }
 
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case START_GAME:
-      return {
+      return { 
+        ...state,
         gameStarted: true
       }
     case EXIT_GAME:
       return {
-        gameStarted: false
+        ...state,
+        gameStarted: false,
+        scorescreen: false
+      }
+    case ENTER_SCORESCREEN:
+      return {
+        ...state,
+        scorescreen: true
       }
     default:
       return state

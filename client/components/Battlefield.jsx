@@ -3,7 +3,8 @@ import './battlefield.css'
 
 import {
   onKeyDown,
-  onKeyUp
+  onKeyUp,
+  checkPlayerHealth
 } from '../helpers/playerShip'
 
 import {
@@ -11,6 +12,7 @@ import {
 } from '../helpers/boundaries'
 
 let boundaryCheckInterval
+export let checkHealthInterval 
 
 class Battlefield extends Component {
  
@@ -18,11 +20,14 @@ class Battlefield extends Component {
     document.addEventListener("keydown", onKeyDown)
     document.addEventListener("keyup", onKeyUp)
     boundaryCheckInterval = setInterval(boundaryCheck, 10)
+    checkHealthInterval = setInterval(checkPlayerHealth, 100)
+
   }
   componentWillUnmount() {
     document.removeEventListener("keydown", onKeyDown)
     document.removeEventListener("keyup", onKeyUp)
     clearInterval(boundaryCheckInterval)
+    
   }
 
   render() {

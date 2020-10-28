@@ -13,7 +13,7 @@ const envr =
   process.env.NODE_ENV === 'production'
     ? applyMiddleware(thunk)
     : composeEnhancers(applyMiddleware(thunk))
-const store = createStore(reducers, envr)
+export const store = createStore(reducers, envr)
 
 document.addEventListener('DOMContentLoaded', () => {
   ReactDOM.render(
