@@ -23,7 +23,7 @@ class Battlefield extends Component {
           keyPressStates.up = true
           // console.log("up");
           upInterval = setInterval(() => {
-            $(".playerShip").animate({ top: "-=5px" }, 10)
+            $(".playerShip").animate({ top: "-=10px" }, {duration: 10, queue: false})
           }, 30)
         }
         break;
@@ -34,7 +34,7 @@ class Battlefield extends Component {
           keyPressStates.down = true
           // console.log("down");
           downInterval = setInterval(() => {
-            $(".playerShip").animate({ top: "+=5px" }, 10)
+            $(".playerShip").animate({ top: "+=10px" }, {duration: 10, queue: false})
           }, 30)
         }
         break;
@@ -43,7 +43,7 @@ class Battlefield extends Component {
           keyPressStates.left = true
           // console.log("left")
           leftInterval = setInterval(() => {
-            $(".playerShip").animate({ left: "-=5px" }, 10)
+            $(".playerShip").animate({ left: "-=10px" }, {duration: 10, queue: false})
           }, 30)
         }
         break;
@@ -52,7 +52,7 @@ class Battlefield extends Component {
           keyPressStates.right = true
           // console.log("right")
           rightInterval = setInterval(() => {
-            $(".playerShip").animate({ left: "+=5px" }, 1)
+            $(".playerShip").animate({ left: "+=10px" }, {duration: 10, queue: false})
           }, 30)
         }
     
