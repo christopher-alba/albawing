@@ -1,10 +1,11 @@
 import React,{Component} from 'react'
+import './battlefield.css'
 
 class Battlefield extends Component {
   render () {
     return (
-      <div>
-        Welcome to the battlefield
+      <div className="mainContainer">
+        <img className="playerShip" src="./images/testShip.png" alt=""/>
       </div>
     )
   }

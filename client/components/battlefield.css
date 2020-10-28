@@ -1,0 +1,16 @@
+.mainContainer{
+  height:100vh;
+  width:100vw;
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  background: url(https://d.newsweek.com/en/full/1555814/space-universe-stars.jpg);
+  background-size:cover;
+}
+
+.playerShip{
+  width:150px;
+  height:auto;
+  position:fixed;
+  bottom:100px;
+}
