@@ -1,5 +1,6 @@
 import {
-  START_GAME
+  START_GAME,
+  EXIT_GAME
 } from '../types'
 
 const INITIAL_STATE = {
@@ -11,6 +12,10 @@ export default (state = INITIAL_STATE, action) => {
     case START_GAME:
       return {
         gameStarted: true
+      }
+    case EXIT_GAME:
+      return {
+        gameStarted: false
       }
     default:
       return state

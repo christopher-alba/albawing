@@ -1,5 +1,6 @@
 import {
-  START_GAME
+  START_GAME,
+  EXIT_GAME
 } from '../types'
 
 export const startGame = data => dispatch => {
@@ -10,5 +11,16 @@ export const startGame = data => dispatch => {
     })
   } catch (err) {
     console.log("Error in startGame action:", err.message);
+  }
+}
+
+export const exitGame = data => dispatch => {
+  try {
+    dispatch({
+      type: EXIT_GAME,
+      payload:data
+    })
+  } catch (err) {
+    console.log("Error in exitGame action", err.message)
   }
 }
