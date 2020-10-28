@@ -10,6 +10,8 @@ let keyPressStates = {
 
 let upInterval
 let downInterval
+let leftInterval
+let rightInterval
 
 class Battlefield extends Component {
   onKeyDown = (event) => {
@@ -19,7 +21,7 @@ class Battlefield extends Component {
         // only toggle if key hasnt been pressed already
         if (keyPressStates.up === false) {
           keyPressStates.up = true
-          console.log("up");
+          // console.log("up");
           upInterval = setInterval(() => {
             $(".playerShip").animate({ top: "-=5px" }, 10)
           }, 30)
@@ -30,17 +32,30 @@ class Battlefield extends Component {
         // only toggle if key hasnt been pressed already
         if (keyPressStates.down === false) {
           keyPressStates.down = true
-          console.log("down");
+          // console.log("down");
           downInterval = setInterval(() => {
             $(".playerShip").animate({ top: "+=5px" }, 10)
           }, 30)
         }
         break;
       case "ArrowLeft":
-        console.log("left");
+        if(keyPressStates.left === false){
+          keyPressStates.left = true
+          // console.log("left")
+          leftInterval = setInterval(() => {
+            $(".playerShip").animate({ left: "-=5px" }, 10)
+          }, 30)
+        }
         break;
       case "ArrowRight":
-        console.log("right");
+        if(keyPressStates.right === false){
+          keyPressStates.right = true
+          // console.log("right")
+          rightInterval = setInterval(() => {
+            $(".playerShip").animate({ left: "+=5px" }, 1)
+          }, 30)
+        }
+    
         break;
     }
   }
@@ -50,20 +65,24 @@ class Battlefield extends Component {
         // only toggle if key hasnt been pressed already
 
         keyPressStates.up = false
-        console.log("up");
+        // console.log("up");
         clearInterval(upInterval)
         break;
 
       case "ArrowDown":
-        console.log("down");
+        // console.log("down");
         keyPressStates.down = false
         clearInterval(downInterval)
         break;
       case "ArrowLeft":
-        console.log("left");
+        // console.log("left");
+        keyPressStates.left = false
+        clearInterval(leftInterval)
         break;
       case "ArrowRight":
-        console.log("right");
+        // console.log("right");
+        keyPressStates.right = false
+        clearInterval(rightInterval)
         break;
     }
   }
