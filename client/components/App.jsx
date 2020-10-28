@@ -1,9 +1,16 @@
 import React from 'react'
-
-const App = () => {
+import Home from './Home'
+import { connect } from 'react-redux'
+const App = (props) => {
   return (
-    <h1>React development has begun!</h1>
+    <>
+      {!props.gameStarted && <Home />}
+    </>
   )
 }
 
-export default App
+const mapStateToProps = state => ({
+  gameStarted: state.gameState.gameStarted
+})
+
+export default connect(mapStateToProps)(App)
