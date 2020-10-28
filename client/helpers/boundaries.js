@@ -19,4 +19,12 @@ export const boundaryCheck = () => {
   if(playerShipPos.right >= window.innerWidth - 100 ){
     clearInterval(rightInterval)
   }
+  let playerBullets = document.getElementsByClassName("playerPrimary")
+  let arena = document.getElementsByClassName("mainContainer")[0]
+  for(let i = 0; i < playerBullets.length; i++){
+    let bullet = playerBullets[i].getBoundingClientRect()
+    if(bullet.top < -100){
+      arena.removeChild(playerBullets[i])
+    }
+  }
 }

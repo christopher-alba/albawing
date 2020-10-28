@@ -21,11 +21,7 @@ export const firePrimary = () => {
       arena.appendChild(bullet)
       // animate the bullet
       $(".playerPrimary" + primaryCount).animate({ top: "-200px" }, {
-        duration: 500, queue: false, done: () => {
-           // destroy the bullet
-          arena.removeChild(bullet)
-        }
-      })
+        duration: 500, queue: false})
       primaryCount++
      
     }, 100)
