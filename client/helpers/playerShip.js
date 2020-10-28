@@ -5,10 +5,10 @@ let keyPressStates = {
   right: false
 }
 
-let upInterval
-let downInterval
-let leftInterval
-let rightInterval
+export let upInterval 
+export let downInterval
+export let leftInterval
+export let rightInterval
 
 export const onKeyDown = (event) => {
 

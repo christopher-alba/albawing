@@ -1,30 +1,28 @@
 import React, { Component } from 'react'
 import './battlefield.css'
+
 import {
   onKeyDown,
   onKeyUp
 } from '../helpers/playerShip'
-let keyPressStates = {
-  up: false,
-  down: false,
-  left: false,
-  right: false
-}
 
-let upInterval
-let downInterval
-let leftInterval
-let rightInterval
+import {
+  boundaryCheck
+} from '../helpers/boundaries'
+
+let boundaryCheckInterval
 
 class Battlefield extends Component {
  
   componentDidMount() {
     document.addEventListener("keydown", onKeyDown)
     document.addEventListener("keyup", onKeyUp)
+    boundaryCheckInterval = setInterval(boundaryCheck, 10)
   }
   componentWillUnmount() {
     document.removeEventListener("keydown", onKeyDown)
     document.removeEventListener("keyup", onKeyUp)
+    clearInterval(boundaryCheckInterval)
   }
 
   render() {
