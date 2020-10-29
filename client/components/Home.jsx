@@ -46,6 +46,13 @@ const Home = () => {
           </div>
 
         </div>
+      </div>
+      <div className="controls">
+        <div>
+          <h2>Controls</h2>
+          <p>Arrow keys to move.</p>
+          <p>Press Q to shoot.</p>
+        </div>
 
       </div>
 
