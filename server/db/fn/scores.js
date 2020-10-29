@@ -8,7 +8,15 @@ function getScores(db = connection) {
 }
 
 function addScore(scoreData, db = connection) {
-  return db('scores').insert(snakecaseKeys(scoreData)).catch(err => {
+  return db('scores')
+    .insert(snakecaseKeys(scoreData))
+    .then(() => {
+      return db('scores')
+        .select()
+        .where("name", scoreData.name)
+        .first()
+    })
+    .catch(err => {
     console.error(err)
   })
 }

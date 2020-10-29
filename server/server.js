@@ -48,9 +48,29 @@ const RootQueryType = new GraphQLObjectType({
   })
 })
 
+const RootMutationType = new GraphQLObjectType({
+  name: 'Mutation',
+  description: 'root mutation',
+  fields: () => ({
+    addScore: {
+      type: ScoresType,
+      description: 'add a score',
+      args: {
+        name: { type: GraphQLNonNull(GraphQLString)},
+        score: {type: GraphQLNonNull(GraphQLFloat)}
+      },
+      resolve: (parent, args) => {
+        const score = { name: args.name, score: args.score}
+        let dbScore = addScore(score)
+        return dbScore
+      }
+    }
+  })
+})
 // Construct a schema, using GraphQL schema language
 const schema = new GraphQLSchema({
-  query: RootQueryType
+  query: RootQueryType,
+  mutation: RootMutationType
 })
 
 
