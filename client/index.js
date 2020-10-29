@@ -7,6 +7,13 @@ import thunk from 'redux-thunk'
 import reducers from './store/reducers/index'
 
 import App from './components/App'
+import { ApolloProvider } from '@apollo/client';
+import { ApolloClient, InMemoryCache } from '@apollo/client';
+
+const client = new ApolloClient({
+  uri: 'http://localhost:3000/graphql',
+  cache: new InMemoryCache()
+});
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 const envr =
@@ -15,11 +22,15 @@ const envr =
     : composeEnhancers(applyMiddleware(thunk))
 export const store = createStore(reducers, envr)
 
+
 document.addEventListener('DOMContentLoaded', () => {
   ReactDOM.render(
-    <Provider store={store}>
-      <App />
-    </Provider>,
+    <ApolloProvider client={client}>
+      <Provider store={store}>
+        <App />
+      </Provider>
+    </ApolloProvider>
+    ,
     document.getElementById('app')
   )
 })
