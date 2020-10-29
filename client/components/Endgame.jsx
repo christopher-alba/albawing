@@ -4,11 +4,11 @@ import { exitGame } from '../store/actions/gamestate'
 import './endgame.css'
 import Button from 'react-bootstrap/Button'
 import { getScore, resetScore } from '../helpers/playerShip'
-import { useMutation, gql } from '@apollo/client';
+import { useMutation, useQuery, gql } from '@apollo/client';
 
 
 const Endgame = (props) => {
-  const SCORE = gql`
+  const ADD_SCORE = gql`
   mutation AddScore($name: String!, $score: Float!){
   addScore(name:$name,score:$score) {
     id
@@ -17,7 +17,18 @@ const Endgame = (props) => {
   }
 }
 `;
-  const [addScore, { data }] = useMutation(SCORE)
+
+const GET_NAMES = gql`
+  query {
+    scores {
+      name
+    }
+  }
+`;
+
+
+  const [addScore, { data }] = useMutation(ADD_SCORE)
+  const names = useQuery(GET_NAMES);
   const score = getScore()
   const [name, setName] = useState('name')
 
@@ -25,13 +36,21 @@ const Endgame = (props) => {
     setName(evt.target.value)
   }
   const handleClick = () => {
+    console.log(names.data.scores);
     if(name === 'name'){
       return 
+    }
+    for(let i = 0; i < names.data.scores.length; i++){
+      if(name === names.data.scores[i].name){
+        return
+      }
     }
     addScore({
       variables: { name: name, score: score}
     })
+    location.reload()
     props.exitGame()
+    
   }
   useEffect(() => {
     return () => {
