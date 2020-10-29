@@ -37,9 +37,14 @@ const Home = () => {
       <Navbar />
       <div className="leaderboard">
         <div>
-          {
-            sortedScores.map((scoreData) => <div>{scoreData.name}: {scoreData.score}</div>)
-          }
+          <h2>Leaderboard</h2>
+          <hr />
+          <div className="scores">
+            {
+              sortedScores.map((scoreData, index) => <div>{index + 1}. {scoreData.name}: {scoreData.score}</div>)
+            }
+          </div>
+
         </div>
 
       </div>

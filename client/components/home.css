@@ -15,9 +15,14 @@
   margin-top:50px;
   margin-bottom:50px;
   display:flex;
-  align-items: center;
   justify-content: center;
   text-align: center;
   background:lightgray;
   border-radius:30px;
+ 
+}
+
+.scores {
+  max-height: 200px;
+  overflow-y: scroll;
 }
