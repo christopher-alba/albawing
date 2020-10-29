@@ -27,4 +27,11 @@ export const boundaryCheck = () => {
       arena.removeChild(playerBullets[i])
     }
   }
+  let enemyBullets = document.getElementsByClassName("enemyBullet")
+  for(let i = 0; i < enemyBullets.length; i++){
+    let bullet = enemyBullets[i].getBoundingClientRect()
+    if(bullet.bottom >= window.innerHeight){
+      arena.removeChild(enemyBullets[i])
+    }
+  }
 }

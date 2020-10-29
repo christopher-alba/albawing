@@ -14,7 +14,8 @@ import {
   checkHealthInterval,
   checkEnemyCountInterval,
   checkEnemyHitInterval,
-  checkDestroyedShipsInterval
+  checkDestroyedShipsInterval,
+  fireEnemyShotsInterval
 } from "../../components/Battlefield"
 
 import {
@@ -42,6 +43,7 @@ export const exitGame = data => dispatch => {
   clearInterval(checkEnemyCountInterval)
   clearInterval(checkEnemyHitInterval)
   clearInterval(checkDestroyedShipsInterval)
+  clearInterval(fireEnemyShotsInterval)
   clearEnemyCount()
 
   try {
@@ -63,6 +65,7 @@ export const enterScorescreen = data => dispatch => {
   clearInterval(checkEnemyCountInterval)
   clearInterval(checkEnemyHitInterval)
   clearInterval(checkDestroyedShipsInterval)
+  clearInterval(fireEnemyShotsInterval)
   clearEnemyCount()
   try {
     dispatch({

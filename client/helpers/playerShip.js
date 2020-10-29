@@ -8,7 +8,7 @@ import {store} from '../index'
 import {
   enterScorescreen
 } from '../store/actions/gamestate'
-import { checkHealthInterval } from '../store/actions/gamestate'
+import { checkHealthInterval } from '../components/Battlefield'
 export let keyPressStates = {
   up: false,
   down: false,

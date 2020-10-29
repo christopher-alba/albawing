@@ -1,6 +1,7 @@
 export let maxEnemyShips = 1;
 export let enemyShipsArray = []
 export let enemyCount = 0
+let enemyBulletCount = 0;
 
 export const checkEnemyCount = () => {
   if (enemyCount === 0) {
@@ -49,4 +50,26 @@ export const clearDestroyedShips = () => {
 
 export const clearEnemyCount = () => {
   maxEnemyShips = 1;
+}
+
+export const fireEnemyShots = () => {
+  let arena = document.getElementsByClassName("mainContainer")[0]
+  for(let i = 0; i < enemyShipsArray.length; i++){
+    let enemyShip = enemyShipsArray[i].reference
+    if(enemyShip !== null){
+      // create bullet
+      let bullet = document.createElement("div")
+      // apply styles to bullet
+      bullet.classList.add("enemyBullet")
+      bullet.classList.add("enemyBullet" + enemyBulletCount)
+      bullet.style.top = enemyShip.getBoundingClientRect().top + 50 + "px"
+      bullet.style.left = enemyShip.getBoundingClientRect().left + 73 + "px"
+      // append bullet to arena
+      arena.appendChild(bullet)
+      // animate bullet
+      $(".enemyBullet" + enemyBulletCount).animate({top: window.innerHeight + 100 + "px"},{duration:1000, queue: false})
+      enemyBulletCount++
+
+    }
+  }
 }
