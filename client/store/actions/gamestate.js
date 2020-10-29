@@ -28,6 +28,7 @@ import {
 import {
   clearEnemyCount,resetShipsArray
 } from "../../helpers/enemyShips"
+
 import { qInterval } from '../../helpers/playerWeapons'
 
 export const startGame = data => dispatch => {
@@ -46,7 +47,7 @@ export const exitGame = data => dispatch => {
 
   endTheGame()
   resetScore()
-  
+
   try {
     dispatch({
       type: EXIT_GAME,
