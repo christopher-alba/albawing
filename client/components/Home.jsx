@@ -17,14 +17,11 @@ const SCORES = gql`
 const Home = () => {
 
   const { loading, error, data } = useQuery(SCORES);
-  const [scores, setScores] = useState([])
-  useEffect(() => {
-    if (data !== undefined) {
-      setScores(data.scores)
-      console.log(scores);
-    }
+  let sortedScores
+  if (data !== undefined) {
+    sortedScores = data.scores.slice().sort((a, b) => b.score - a.score)
+  }
 
-  })
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error :( {error.message}</p>;
   console.log(data)
@@ -38,10 +35,15 @@ const Home = () => {
         </div>
       </div>
       <Navbar />
-      {
+      <div className="leaderboard">
+        <div>
+          {
+            sortedScores.map((scoreData) => <div>{scoreData.name}: {scoreData.score}</div>)
+          }
+        </div>
 
-        scores !== undefined && scores.map((scoreData) => <div>{scoreData.name}: {scoreData.score}</div>)
-      }
+      </div>
+
     </Container>
 
   )

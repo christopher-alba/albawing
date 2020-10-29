@@ -10,27 +10,8 @@ class Navbar extends Component {
   render() {
     return (
       <div className="navbarCustom">
-        <div className="navbarBrand">
-          AW
-        </div>
-        <div className="navbarLinksLeft">
-          <div className="link">
-            Home
-        </div>
-          <div className="link">
-            Leaderboard
-        </div>
-        </div>
         <div className="navbarStartGame" onClick={this.handleClick}>
           START GAME
-        </div>
-        <div className="navbarLinksRight">
-          <div className="link">
-            LOGIN
-        </div>
-          <div className="link">
-            SIGNUP
-          </div>
         </div>
       </div>
     )
