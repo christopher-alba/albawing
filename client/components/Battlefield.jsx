@@ -37,16 +37,7 @@ class Battlefield extends Component {
     checkDestroyedShipsInterval = setInterval(clearDestroyedShips,10)
     spawnEnemyShips()
   }
-  componentWillUnmount() {
-    document.removeEventListener("keydown", onKeyDown)
-    document.removeEventListener("keyup", onKeyUp)
-    clearInterval(boundaryCheckInterval)
-    clearInterval(checkHealthInterval)
-    clearInterval(checkEnemyCountInterval)
-    clearInterval(checkEnemyHitInterval)
-    clearInterval(checkDestroyedShipsInterval)
-  }
-
+ 
   render() {
     return (
       <div className="mainContainer">

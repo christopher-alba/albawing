@@ -22,6 +22,7 @@ import {
 } from "../../helpers/enemyShips"
 
 export const startGame = data => dispatch => {
+  
   try {
     dispatch({
       type: START_GAME,
