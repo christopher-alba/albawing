@@ -10,6 +10,7 @@ import {
   onKeyDown,
   onKeyUp,
   resetPlayerHealth,
+  resetScore,
   rightInterval,
   upInterval
 } from '../../helpers/playerShip'
@@ -44,7 +45,8 @@ export const startGame = data => dispatch => {
 export const exitGame = data => dispatch => {
 
   endTheGame()
-
+  resetScore()
+  
   try {
     dispatch({
       type: EXIT_GAME,

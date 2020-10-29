@@ -43,7 +43,7 @@ export const checkPlayerHit = () => {
       let playerBox = document.getElementsByClassName("playerShip")[0].getBoundingClientRect()
       if((bulletBox.top + bulletBox.height > playerBox.top && bulletBox.top < playerBox.top + playerBox.height && bulletBox.left > playerBox.left + playerBox.width / 3 && bulletBox.right < playerBox.left + playerBox.width - playerBox.width / 3)){
         arena.removeChild(bullet)
-        reducePlayerHealth(100)
+        reducePlayerHealth(10)
       }
     }
   }

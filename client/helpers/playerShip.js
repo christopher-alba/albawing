@@ -23,7 +23,7 @@ export let upInterval
 export let downInterval
 export let leftInterval
 export let rightInterval
-
+export let score = 0;
 export const onKeyDown = (event) => {
 
   switch (event.key) {
@@ -125,4 +125,16 @@ export const reducePlayerHealth = (damage) => {
 
 export const resetPlayerHealth = () => {
   playerHealth = 100
+}
+
+export const increaseScore = (points) => {
+  score += points
+  console.log(score);
+}
+
+export const resetScore = () => {
+  score = 0
+}
+export const getScore = () => {
+  return score
 }

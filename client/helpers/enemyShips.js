@@ -2,7 +2,9 @@ export let maxEnemyShips = 1;
 export let enemyShipsArray = []
 export let enemyCount = 0
 let enemyBulletCount = 0;
-
+import {
+  increaseScore
+} from './playerShip'
 export const checkEnemyCount = () => {
   if (enemyCount === 0) {
     maxEnemyShips++
@@ -42,6 +44,7 @@ export const clearDestroyedShips = () => {
         arena.removeChild(enemyShipsArray[i].reference)
         enemyShipsArray[i].reference = null
         enemyCount--
+        increaseScore(1)
       }
     }
 
