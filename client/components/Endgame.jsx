@@ -18,7 +18,7 @@ const Endgame = (props) => {
 }
 `;
 
-const GET_NAMES = gql`
+  const GET_NAMES = gql`
   query {
     scores {
       name
@@ -31,26 +31,27 @@ const GET_NAMES = gql`
   const names = useQuery(GET_NAMES);
   const score = getScore()
   const [name, setName] = useState('name')
-
+  const [errMsg, setErrMsg] = useState(null)
   const handleChange = (evt) => {
     setName(evt.target.value)
   }
   const handleClick = () => {
-    console.log(names.data.scores);
-    if(name === 'name'){
-      return 
+    if (name === 'name') {
+      setErrMsg('You must enter a name.')
+      return
     }
-    for(let i = 0; i < names.data.scores.length; i++){
-      if(name === names.data.scores[i].name){
+    for (let i = 0; i < names.data.scores.length; i++) {
+      if (name === names.data.scores[i].name) {
+        setErrMsg('This name is already taken. You must enter a unique name.')
         return
       }
     }
     addScore({
-      variables: { name: name, score: score}
+      variables: { name: name, score: score }
     })
     location.reload()
     props.exitGame()
-    
+
   }
   useEffect(() => {
     return () => {
@@ -63,6 +64,7 @@ const GET_NAMES = gql`
         <p>The game has ended. Here is your score: {score}</p>
         <input onChange={handleChange} type="text" placeholder="Enter your name" />
         <Button onClick={handleClick} variant="dark">Save Score</Button>
+        {errMsg && <div>{errMsg}</div>}
       </div>
 
     </div>
