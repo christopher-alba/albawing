@@ -5,8 +5,13 @@ import {
 } from '../types'
 
 import {
+  downInterval,
+  leftInterval,
   onKeyDown,
-  onKeyUp
+  onKeyUp,
+  resetPlayerHealth,
+  rightInterval,
+  upInterval
 } from '../../helpers/playerShip'
 
 import {
@@ -15,15 +20,17 @@ import {
   checkEnemyCountInterval,
   checkEnemyHitInterval,
   checkDestroyedShipsInterval,
-  fireEnemyShotsInterval
+  fireEnemyShotsInterval,
+  checkPlayerHitInterval
 } from "../../components/Battlefield"
 
 import {
-  clearEnemyCount
+  clearEnemyCount,resetShipsArray
 } from "../../helpers/enemyShips"
+import { qInterval } from '../../helpers/playerWeapons'
 
 export const startGame = data => dispatch => {
-  
+
   try {
     dispatch({
       type: START_GAME,
@@ -35,16 +42,8 @@ export const startGame = data => dispatch => {
 }
 
 export const exitGame = data => dispatch => {
- 
-  document.removeEventListener("keydown", onKeyDown)
-  document.removeEventListener("keyup", onKeyUp)
-  clearInterval(boundaryCheckInterval)
-  clearInterval(checkHealthInterval)
-  clearInterval(checkEnemyCountInterval)
-  clearInterval(checkEnemyHitInterval)
-  clearInterval(checkDestroyedShipsInterval)
-  clearInterval(fireEnemyShotsInterval)
-  clearEnemyCount()
+
+  endTheGame()
 
   try {
     dispatch({
@@ -58,15 +57,8 @@ export const exitGame = data => dispatch => {
 
 export const enterScorescreen = data => dispatch => {
 
-  document.removeEventListener("keydown", onKeyDown)
-  document.removeEventListener("keyup", onKeyUp)
-  clearInterval(boundaryCheckInterval)
-  clearInterval(checkHealthInterval)
-  clearInterval(checkEnemyCountInterval)
-  clearInterval(checkEnemyHitInterval)
-  clearInterval(checkDestroyedShipsInterval)
-  clearInterval(fireEnemyShotsInterval)
-  clearEnemyCount()
+  endTheGame()
+
   try {
     dispatch({
       type: ENTER_SCORESCREEN,
@@ -75,4 +67,24 @@ export const enterScorescreen = data => dispatch => {
   } catch (err) {
     console.log("Error in enterScorescreen action", err.message)
   }
+}
+
+function endTheGame() {
+  resetPlayerHealth()
+  document.removeEventListener("keydown", onKeyDown)
+  document.removeEventListener("keyup", onKeyUp)
+  clearInterval(boundaryCheckInterval)
+  clearInterval(checkHealthInterval)
+  clearInterval(checkEnemyCountInterval)
+  clearInterval(checkEnemyHitInterval)
+  clearInterval(checkDestroyedShipsInterval)
+  clearInterval(fireEnemyShotsInterval)
+  clearInterval(checkPlayerHitInterval)
+  clearInterval(upInterval)
+  clearInterval(downInterval)
+  clearInterval(leftInterval)
+  clearInterval(rightInterval)
+  clearInterval(qInterval)
+  resetShipsArray()
+  clearEnemyCount()
 }

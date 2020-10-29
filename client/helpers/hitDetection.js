@@ -1,4 +1,5 @@
 import { enemyShipsArray } from './enemyShips'
+import {reducePlayerHealth} from './playerShip'
 
 export const checkEnemyHit = () => {
   let playerBullets = document.getElementsByClassName("playerPrimary")
@@ -28,5 +29,22 @@ export const checkEnemyHit = () => {
       }
     }
 
+  }
+}
+
+export const checkPlayerHit = () => {
+  let enemyBullets = document.getElementsByClassName("enemyBullet")
+  let arena = document.getElementsByClassName("mainContainer")[0]
+  for(let i = 0; i < enemyBullets.length; i++){
+    let bullet = enemyBullets[i]
+
+    if(bullet !== undefined){
+      let bulletBox = bullet.getBoundingClientRect()
+      let playerBox = document.getElementsByClassName("playerShip")[0].getBoundingClientRect()
+      if((bulletBox.top + bulletBox.height > playerBox.top && bulletBox.top < playerBox.top + playerBox.height && bulletBox.left > playerBox.left + playerBox.width / 3 && bulletBox.right < playerBox.left + playerBox.width - playerBox.width / 3)){
+        arena.removeChild(bullet)
+        reducePlayerHealth(100)
+      }
+    }
   }
 }

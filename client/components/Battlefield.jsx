@@ -16,7 +16,7 @@ import {
 } from '../helpers/enemyShips'
 
 import {
-  checkEnemyHit 
+  checkEnemyHit, checkPlayerHit 
 } from '../helpers/hitDetection'
 
 export let boundaryCheckInterval
@@ -25,6 +25,7 @@ export let checkEnemyCountInterval
 export let checkEnemyHitInterval
 export let checkDestroyedShipsInterval
 export let fireEnemyShotsInterval
+export let checkPlayerHitInterval
 
 class Battlefield extends Component {
  
@@ -37,6 +38,7 @@ class Battlefield extends Component {
     checkEnemyHitInterval = setInterval(checkEnemyHit, 10)
     checkDestroyedShipsInterval = setInterval(clearDestroyedShips,10)
     fireEnemyShotsInterval = setInterval(fireEnemyShots, 1000)
+    checkPlayerHitInterval = setInterval(checkPlayerHit, 10)
     spawnEnemyShips()
   }
  

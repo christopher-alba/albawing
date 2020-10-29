@@ -118,3 +118,11 @@ export const checkPlayerHealth = () => {
     store.dispatch(enterScorescreen())
   }
 }
+export const reducePlayerHealth = (damage) => {
+  playerHealth -= damage
+  console.log(playerHealth);
+}
+
+export const resetPlayerHealth = () => {
+  playerHealth = 100
+}

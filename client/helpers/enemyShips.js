@@ -73,3 +73,7 @@ export const fireEnemyShots = () => {
     }
   }
 }
+
+export const resetShipsArray = () => {
+  enemyShipsArray = []
+}
