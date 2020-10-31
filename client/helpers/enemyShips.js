@@ -66,7 +66,7 @@ export const spawnEnemyBoss = () => {
   enemyShipElement.classList.add("enemyBoss")
   enemyShipElement.src = "./images/testShip.png"
   enemyShipElement.style.position = "fixed"
-  enemyShipElement.style.top = 100 + "px"
+  enemyShipElement.style.top = 0 + "px"
   enemyShipElement.style.left = window.innerWidth / 2.5 + "px"
   // append new ship to arena
   let arena = document.getElementsByClassName("mainContainer")[0]

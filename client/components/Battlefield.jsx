@@ -37,7 +37,7 @@ class Battlefield extends Component {
     checkEnemyCountInterval = setInterval(checkEnemyCount,100)
     checkEnemyHitInterval = setInterval(checkEnemyHit, 10)
     checkDestroyedShipsInterval = setInterval(clearDestroyedShips,10)
-    fireEnemyShotsInterval = setInterval(fireEnemyShots, 1000)
+    fireEnemyShotsInterval = setInterval(fireEnemyShots, 2000)
     checkPlayerHitInterval = setInterval(checkPlayerHit, 10)
     spawnEnemyShips()
   }
