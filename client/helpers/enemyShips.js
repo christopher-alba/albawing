@@ -9,16 +9,19 @@ import {
 } from './playerShip'
 export const checkEnemyCount = () => {
   if (enemyCount === 0) {
-    roundCounter++
+    if (roundCounter !== 2) {
+      roundCounter++
+    } else {
+      roundCounter = 0
+    }
     if (roundCounter === 2) {
       maxEnemyShips += 2
       spawnEnemyShips()
       spawnEnemyBoss()
-      roundCounter = 0
     } else {
       maxEnemyShips++
       spawnEnemyShips()
-      
+
     }
   }
 }
@@ -57,14 +60,14 @@ export const spawnEnemyShips = () => {
 let enemyBossHealth = 0
 
 export const spawnEnemyBoss = () => {
- enemyBossHealth = 50
+  enemyBossHealth = 50
   // assign values to enemyShip
   let enemyShipElement = document.createElement("img")
   enemyShipElement.classList.add("enemyBoss")
   enemyShipElement.src = "./images/testShip.png"
   enemyShipElement.style.position = "fixed"
-  enemyShipElement.style.top = Math.random() * 50 + 50 + "px"
-  enemyShipElement.style.left = window.innerWidth/2.5 + "px"
+  enemyShipElement.style.top = 100 + "px"
+  enemyShipElement.style.left = window.innerWidth / 2.5 + "px"
   // append new ship to arena
   let arena = document.getElementsByClassName("mainContainer")[0]
   arena.appendChild(enemyShipElement)
@@ -110,6 +113,8 @@ export const clearLevels = () => {
 
 export const fireEnemyShots = () => {
   let arena = document.getElementsByClassName("mainContainer")[0]
+
+  // fire bullets for small enemyships
   for (let i = 0; i < enemyShipsArray.length; i++) {
     let enemyShip = enemyShipsArray[i].reference
     if (enemyShip !== null) {
@@ -128,6 +133,28 @@ export const fireEnemyShots = () => {
 
     }
   }
+
+  // fire bullets for boss
+  // get position of boss
+  let enemyBoss = document.getElementsByClassName("enemyBoss")[0]
+  // only spawn projectiles if boss exists
+  if (enemyBoss !== undefined) {
+    let enemyBossBox = enemyBoss.getBoundingClientRect()
+    // create projectiles
+    for (let i = 0; i < 5; i++) {
+      let bossBullet = document.createElement("div")
+      bossBullet.style.top = enemyBossBox.top + 200 + "px"
+      bossBullet.style.left = enemyBossBox.left - 50 + (i + 1)*(enemyBossBox.width/5) + "px"
+      bossBullet.classList.add("enemyBullet")
+      bossBullet.classList.add("enemyBullet" + enemyBulletCount)
+      arena.appendChild(bossBullet)
+      // animate projectiles
+      $(".enemyBullet" + enemyBulletCount).animate({ top: window.innerHeight + 100 + "px" }, { duration: 1000, queue: false })
+      enemyBulletCount++
+    }
+
+  }
+
 }
 
 export const resetShipsArray = () => {
