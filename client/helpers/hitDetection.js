@@ -1,5 +1,5 @@
-import { enemyShipsArray } from './enemyShips'
-import {reducePlayerHealth} from './playerShip'
+import { damageEnemyBoss, enemyShipsArray, getBossHealth, reduceEnemyCount } from './enemyShips'
+import {increaseScore, reducePlayerHealth} from './playerShip'
 
 export const checkEnemyHit = () => {
   let playerBullets = document.getElementsByClassName("playerPrimary")
@@ -9,6 +9,8 @@ export const checkEnemyHit = () => {
 
     if (bullet !== undefined) {
       let bulletBox = bullet.getBoundingClientRect()
+
+      // check if the bullet has hit a small enemyship
       for (let j = 0; j < enemyShipsArray.length; j++) {
         let enemyShip = enemyShipsArray[j].reference
 
@@ -24,6 +26,23 @@ export const checkEnemyHit = () => {
             }
 
           }
+        }
+
+      }
+
+      // check if the bullet has hit the enemy boss
+      let enemyBoss = document.getElementsByClassName("enemyBoss")[0]
+      if(enemyBoss !== undefined ){
+        let enemyBossBox = enemyBoss.getBoundingClientRect()
+        if(bulletBox.top < enemyBossBox.top + enemyBossBox.height && bulletBox.left > enemyBossBox.left && bulletBox.right < enemyBossBox.right){
+          bullet.remove()
+          damageEnemyBoss(1)
+          console.log(getBossHealth());
+        }
+        if(getBossHealth() <= 0){
+          enemyBoss.remove()
+          increaseScore(50)
+          reduceEnemyCount()
         }
 
       }

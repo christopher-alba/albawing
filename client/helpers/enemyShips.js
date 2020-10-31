@@ -2,19 +2,37 @@ export let maxEnemyShips = 1;
 export let enemyShipsArray = []
 export let enemyCount = 0
 let enemyBulletCount = 0;
+let roundCounter = 0;
+let level = 0;
 import {
   increaseScore
 } from './playerShip'
 export const checkEnemyCount = () => {
   if (enemyCount === 0) {
-    maxEnemyShips++
-    spawnEnemyShips()
+    roundCounter++
+    if (roundCounter === 2) {
+      maxEnemyShips += 2
+      spawnEnemyShips()
+      spawnEnemyBoss()
+      roundCounter = 0
+    } else {
+      maxEnemyShips++
+      spawnEnemyShips()
+      
+    }
   }
 }
 
 export const spawnEnemyShips = () => {
+
   enemyCount = 0
-  for (let i = 0; i < maxEnemyShips; i++) {
+
+  let maxCount = maxEnemyShips
+  if (roundCounter === 2) {
+    maxCount = maxEnemyShips - 1
+  }
+
+  for (let i = 0; i < maxCount; i++) {
     // create new ship object
     let enemyShip = {}
     // assign values to enemyShip
@@ -36,6 +54,31 @@ export const spawnEnemyShips = () => {
   }
 }
 
+let enemyBossHealth = 0
+
+export const spawnEnemyBoss = () => {
+ enemyBossHealth = 50
+  // assign values to enemyShip
+  let enemyShipElement = document.createElement("img")
+  enemyShipElement.classList.add("enemyBoss")
+  enemyShipElement.src = "./images/testShip.png"
+  enemyShipElement.style.position = "fixed"
+  enemyShipElement.style.top = Math.random() * 50 + 50 + "px"
+  enemyShipElement.style.left = window.innerWidth/2.5 + "px"
+  // append new ship to arena
+  let arena = document.getElementsByClassName("mainContainer")[0]
+  arena.appendChild(enemyShipElement)
+  // increase enemyCount
+  enemyCount++
+}
+
+export const damageEnemyBoss = (damage) => {
+  enemyBossHealth -= damage
+}
+export const getBossHealth = () => {
+  return enemyBossHealth
+}
+
 export const clearDestroyedShips = () => {
   for (let i = 0; i < enemyShipsArray.length; i++) {
     if (enemyShipsArray[i].reference != null) {
@@ -54,12 +97,22 @@ export const clearDestroyedShips = () => {
 export const clearEnemyCount = () => {
   maxEnemyShips = 1;
 }
+export const reduceEnemyCount = () => {
+  enemyCount -= 1
+}
+export const clearRoundCounter = () => {
+  roundCounter = 0;
+}
+
+export const clearLevels = () => {
+  level = 0;
+}
 
 export const fireEnemyShots = () => {
   let arena = document.getElementsByClassName("mainContainer")[0]
-  for(let i = 0; i < enemyShipsArray.length; i++){
+  for (let i = 0; i < enemyShipsArray.length; i++) {
     let enemyShip = enemyShipsArray[i].reference
-    if(enemyShip !== null){
+    if (enemyShip !== null) {
       // create bullet
       let bullet = document.createElement("div")
       // apply styles to bullet
@@ -70,7 +123,7 @@ export const fireEnemyShots = () => {
       // append bullet to arena
       arena.appendChild(bullet)
       // animate bullet
-      $(".enemyBullet" + enemyBulletCount).animate({top: window.innerHeight + 100 + "px"},{duration:1000, queue: false})
+      $(".enemyBullet" + enemyBulletCount).animate({ top: window.innerHeight + 100 + "px" }, { duration: 1000, queue: false })
       enemyBulletCount++
 
     }

@@ -46,10 +46,11 @@ const Endgame = (props) => {
         return
       }
     }
+
     addScore({
       variables: { name: name, score: score }
     })
-    location.reload()
+    // location.reload()
     props.exitGame()
 
   }
@@ -62,7 +63,7 @@ const Endgame = (props) => {
     <div className="scorescreen" >
       <div>
         <p>The game has ended. Here is your score: {score}</p>
-        <input onChange={handleChange} type="text" placeholder="Enter your name" />
+        <input onChange={handleChange} maxlength="20" type="text" placeholder="Enter your name" />
         <Button onClick={handleClick} variant="dark">Save Score</Button>
         {errMsg && <div>{errMsg}</div>}
       </div>
