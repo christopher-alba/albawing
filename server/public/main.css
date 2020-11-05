@@ -30,3 +30,19 @@ body {
   background:orange;
   position:fixed;
 }
+
+.shipExplode {
+  height: 150px;
+  width:150px;
+  border-radius:50%;
+  background:orange;
+  position:fixed;
+}
+
+.bossExplode {
+  height: 400px;
+  width:400px;
+  border-radius:50%;
+  background:orange;
+  position:fixed;
+}

@@ -1,5 +1,6 @@
 import { damageEnemyBoss, enemyShipsArray, getBossHealth, reduceEnemyCount } from './enemyShips'
-import {increaseScore, reducePlayerHealth} from './playerShip'
+import { increaseScore, reducePlayerHealth } from './playerShip'
+import {bulletExplode, enemyBossExplode, enemyShipExplode} from './explosions'
 
 export const checkEnemyHit = () => {
   let playerBullets = document.getElementsByClassName("playerPrimary")
@@ -19,6 +20,9 @@ export const checkEnemyHit = () => {
           // if the bullet has hit the enemy, reduce enemy HP
           if (bulletBox.top < enemyShipBox.top + enemyShipBox.height && bulletBox.top + bulletBox.height > enemyShipBox.top && bulletBox.left > enemyShipBox.left && bulletBox.right < enemyShipBox.right) {
             enemyShipsArray[j].health--
+            if( enemyShipsArray[j].health <= 0){
+              enemyShipExplode(enemyShipBox)
+            }
             // clear the bulletq
             try {
               arena.removeChild(bullet)
@@ -33,16 +37,17 @@ export const checkEnemyHit = () => {
 
       // check if the bullet has hit the enemy boss
       let enemyBoss = document.getElementsByClassName("enemyBoss")[0]
-      if(enemyBoss !== undefined ){
+      if (enemyBoss !== undefined) {
         let enemyBossBox = enemyBoss.getBoundingClientRect()
-        if(bulletBox.top < enemyBossBox.top + enemyBossBox.height && bulletBox.left > enemyBossBox.left && bulletBox.right < enemyBossBox.right){
+        if (bulletBox.top < enemyBossBox.top + enemyBossBox.height && bulletBox.left > enemyBossBox.left && bulletBox.right < enemyBossBox.right) {
           bullet.remove()
           bulletExplode(bulletBox)
           damageEnemyBoss(1)
           console.log(getBossHealth());
         }
-        if(getBossHealth() <= 0){
+        if (getBossHealth() <= 0) {
           enemyBoss.remove()
+          enemyBossExplode(enemyBossBox)
           increaseScore(50)
           reduceEnemyCount()
         }
@@ -56,13 +61,13 @@ export const checkEnemyHit = () => {
 export const checkPlayerHit = () => {
   let enemyBullets = document.getElementsByClassName("enemyBullet")
   let arena = document.getElementsByClassName("mainContainer")[0]
-  for(let i = 0; i < enemyBullets.length; i++){
+  for (let i = 0; i < enemyBullets.length; i++) {
     let bullet = enemyBullets[i]
 
-    if(bullet !== undefined){
+    if (bullet !== undefined) {
       let bulletBox = bullet.getBoundingClientRect()
       let playerBox = document.getElementsByClassName("playerShip")[0].getBoundingClientRect()
-      if((bulletBox.top + bulletBox.height > playerBox.top && bulletBox.top < playerBox.top + playerBox.height && bulletBox.left > playerBox.left + playerBox.width / 3 && bulletBox.right < playerBox.left + playerBox.width - playerBox.width / 3)){
+      if ((bulletBox.top + bulletBox.height > playerBox.top && bulletBox.top < playerBox.top + playerBox.height && bulletBox.left > playerBox.left + playerBox.width / 3 && bulletBox.right < playerBox.left + playerBox.width - playerBox.width / 3)) {
         arena.removeChild(bullet)
         bulletExplode(bulletBox)
         reducePlayerHealth(10)
@@ -71,16 +76,3 @@ export const checkPlayerHit = () => {
   }
 }
 
-// call this function whenever a bullet has hit its target
-const bulletExplode = (bulletBox) => {
-  // create explosion
-  let explosion = document.createElement("div")
-  explosion.style.top = bulletBox.top + "px"
-  explosion.style.left = bulletBox.left + "px"
-  explosion.classList.add("bulletExplode")
-  
-  let arena = document.getElementsByClassName("mainContainer")[0]
-  arena.appendChild(explosion)
-  explosion.animate({opacity: 0}, {duration: 500, queue: false})
-  setTimeout(() => explosion.remove(), 500)
-}
